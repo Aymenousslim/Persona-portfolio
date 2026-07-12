@@ -91,7 +91,10 @@ header{
   position:sticky;top:0;z-index:50;
   background:linear-gradient(180deg,#000 70%, rgba(0,0,0,0));
   padding:12px 0 22px;
+  transition:transform .32s ease;
 }
+/* slides out of the way while scrolling down, returns on scroll up */
+header.hide{transform:translateY(-102%);pointer-events:none;}
 .hud{
   display:flex;align-items:stretch;gap:10px;flex-wrap:wrap;
 }
@@ -822,6 +825,8 @@ function goTab(name){
   const sec = document.getElementById(name);
   sec.classList.add("show");
   sfx.slash();
+  $("header").classList.remove("hide");
+  window.scrollTo({top:0, behavior:"smooth"});
   if(name === "stats") renderStats();
 }
 $$(".tab").forEach(t => {
@@ -852,6 +857,18 @@ $("#sndBtn").addEventListener("click", function(){
 // hover blips on interactive cards
 document.addEventListener("mouseover", e => {
   if(e.target.closest(".quest,.card,.clink,.chip,.pbtn")) sfx.hover();
+}, {passive:true});
+
+// auto-hide the header while scrolling down, bring it back on scroll up
+let lastY = window.scrollY;
+window.addEventListener("scroll", () => {
+  const y = window.scrollY;
+  const delta = y - lastY;
+  if(Math.abs(delta) < 8) return; // ignore tiny jitters
+  const header = $("header");
+  if(delta > 0 && y > 120) header.classList.add("hide");
+  else header.classList.remove("hide");
+  lastY = y;
 }, {passive:true});
 
 // init
