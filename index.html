@@ -64,6 +64,27 @@ body{
   from{transform:translate(0,0) rotate(0deg);}
   to{transform:translate(26px,-20px) rotate(2.4deg);}
 }
+/* the phantom thief — original SVG figure, full-height background animation */
+#bg .joker{
+  position:absolute;right:-1vw;bottom:-2vh;height:76vh;width:auto;
+  opacity:.55;
+  animation:jkFloat 6s ease-in-out infinite;
+  filter:drop-shadow(0 0 26px rgba(230,0,18,.28));
+}
+@keyframes jkFloat{
+  0%,100%{transform:translateY(0) rotate(-1deg);}
+  50%{transform:translateY(-16px) rotate(1.2deg);}
+}
+#bg .joker .tailL,#bg .joker .tailR{transform-box:fill-box;}
+#bg .joker .tailL{transform-origin:85% 4%;animation:tailSwayL 4.2s ease-in-out infinite alternate;}
+#bg .joker .tailR{transform-origin:15% 4%;animation:tailSwayR 4.8s ease-in-out infinite alternate;}
+@keyframes tailSwayL{from{transform:rotate(-5deg);}to{transform:rotate(3deg);}}
+@keyframes tailSwayR{from{transform:rotate(4deg);}to{transform:rotate(-4deg);}}
+#bg .joker .aura{animation:auraPulse 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+@keyframes auraPulse{0%,100%{opacity:.5;transform:scale(1);}50%{opacity:.95;transform:scale(1.07);}}
+@media (max-width:760px){
+  #bg .joker{height:46vh;opacity:.4;right:-7vw;}
+}
 /* twinkling star sparkles */
 #bg .spark{
   position:absolute;font-family:'Anton',sans-serif;color:var(--red);
@@ -443,6 +464,50 @@ footer b{color:var(--red);}
   <div class="shard s2"></div>
   <div class="shard s3"></div>
   <div class="shard s4"></div>
+  <!-- original phantom-thief figure (hand-drawn SVG, not game art) -->
+  <svg class="joker" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="jkAuraGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(230,0,18,.30)"/>
+        <stop offset="70%" stop-color="rgba(230,0,18,.10)"/>
+        <stop offset="100%" stop-color="rgba(230,0,18,0)"/>
+      </radialGradient>
+    </defs>
+    <ellipse class="aura" cx="100" cy="160" rx="95" ry="150" fill="url(#jkAuraGrad)"/>
+    <g>
+      <!-- coat tails (animated) -->
+      <path class="tailL" d="M92,142 C82,182 62,232 42,270 C60,258 78,236 88,200 C92,180 93,160 93,146 Z"
+            fill="#14141a" stroke="rgba(230,0,18,.45)" stroke-width="1.5"/>
+      <path class="tailR" d="M108,142 C118,184 138,234 160,272 C142,258 124,236 113,198 C108,178 107,158 107,146 Z"
+            fill="#14141a" stroke="rgba(230,0,18,.45)" stroke-width="1.5"/>
+      <!-- legs -->
+      <path d="M94,148 L90,210 L88,252 L96,252 L99,200 Z" fill="#101016"/>
+      <path d="M106,148 L110,210 L112,252 L104,252 L101,200 Z" fill="#101016"/>
+      <path d="M88,252 L76,259 L96,259 L96,252 Z" fill="#0c0c10"/>
+      <path d="M112,252 L124,259 L104,259 L104,252 Z" fill="#0c0c10"/>
+      <!-- torso / jacket -->
+      <path d="M84,76 L116,76 L112,120 L108,148 L92,148 L88,120 Z"
+            fill="#14141a" stroke="rgba(230,0,18,.35)" stroke-width="1.2"/>
+      <!-- high collar -->
+      <path d="M78,64 L100,75 L122,64 L116,82 L84,82 Z" fill="#181820"/>
+      <!-- left arm hanging out + red glove -->
+      <path d="M85,81 C74,93 68,113 63,133 L59,146" fill="none"
+            stroke="#14141a" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="58" cy="151" r="7" fill="var(--red)"/>
+      <!-- right arm raised + red glove + dagger -->
+      <path d="M115,81 C130,87 142,93 151,100" fill="none"
+            stroke="#14141a" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="155" cy="102" r="7" fill="var(--red)"/>
+      <path d="M157,97 L176,77 L180,83 L162,104 Z" fill="#c9c9d4"/>
+      <!-- spiky hair -->
+      <path d="M100,16 L114,25 L125,20 L127,35 L136,40 L127,50 L129,62 L116,56 L100,60 L84,58 L71,62 L75,48 L64,42 L75,33 L73,20 L88,25 Z"
+            fill="#14141a" stroke="rgba(230,0,18,.3)" stroke-width="1.2"/>
+      <!-- white mask -->
+      <path d="M75,44 L98,37 L100,44 L102,37 L125,44 L118,59 L103,54 L97,54 L82,59 Z" fill="#f4f4f4"/>
+      <ellipse cx="89" cy="48" rx="4.5" ry="3" fill="#0a0a0a" transform="rotate(-8 89 48)"/>
+      <ellipse cx="111" cy="48" rx="4.5" ry="3" fill="#0a0a0a" transform="rotate(8 111 48)"/>
+    </g>
+  </svg>
   <span class="spark"   style="top:14%;left:8%;font-size:26px;">✦</span>
   <span class="spark w" style="top:32%;right:12%;font-size:18px;animation-delay:.9s">✦</span>
   <span class="spark"   style="top:64%;left:16%;font-size:14px;animation-delay:1.6s">✦</span>
